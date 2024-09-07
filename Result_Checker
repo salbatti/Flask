@@ -1,0 +1,26 @@
+from flask import Flask,redirect,url_for,render_template
+
+app= Flask(__name__)
+
+
+@app.route('/success1/<int:score>')
+def success(score):
+    return "<html><body><h1>He is Passed</h1></body></html>"
+
+@app.route('/failed67/<int:score>')
+def failed(score):
+    return"He is failed with "+str(score)
+
+@app.route('/result/<int:marks>')
+def result(marks):
+    result=""
+    if marks>50:
+        result="success"
+    else:
+        result="failed"
+    
+    return redirect(url_for(result,score=marks))
+
+
+if __name__=="__main__":
+    app.run(debug=True)
